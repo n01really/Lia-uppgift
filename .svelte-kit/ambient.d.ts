@@ -45,6 +45,7 @@ declare module '$env/static/private' {
 	export const FPS_BROWSER_USER_PROFILE_STRING: string;
 	export const GDAL_DATA: string;
 	export const GIT_ASKPASS: string;
+	export const GIT_PAGER: string;
 	export const HOME: string;
 	export const HOMEDRIVE: string;
 	export const HOMEPATH: string;
@@ -85,7 +86,6 @@ declare module '$env/static/private' {
 	export const PATHEXT: string;
 	export const POSTGIS_ENABLE_OUTDB_RASTERS: string;
 	export const POSTGIS_GDAL_ENABLED_DRIVERS: string;
-	export const POWERSHELL_DISTRIBUTION_CHANNEL: string;
 	export const PROCESSOR_ARCHITECTURE: string;
 	export const PROCESSOR_IDENTIFIER: string;
 	export const PROCESSOR_LEVEL: string;
@@ -95,7 +95,6 @@ declare module '$env/static/private' {
 	export const ProgramW6432: string;
 	export const PROJ_LIB: string;
 	export const PROMPT: string;
-	export const PSExecutionPolicyPreference: string;
 	export const PSModulePath: string;
 	export const PUBLIC: string;
 	export const SESSIONNAME: string;
@@ -163,6 +162,7 @@ declare module '$env/dynamic/private' {
 		FPS_BROWSER_USER_PROFILE_STRING: string;
 		GDAL_DATA: string;
 		GIT_ASKPASS: string;
+		GIT_PAGER: string;
 		HOME: string;
 		HOMEDRIVE: string;
 		HOMEPATH: string;
@@ -203,7 +203,6 @@ declare module '$env/dynamic/private' {
 		PATHEXT: string;
 		POSTGIS_ENABLE_OUTDB_RASTERS: string;
 		POSTGIS_GDAL_ENABLED_DRIVERS: string;
-		POWERSHELL_DISTRIBUTION_CHANNEL: string;
 		PROCESSOR_ARCHITECTURE: string;
 		PROCESSOR_IDENTIFIER: string;
 		PROCESSOR_LEVEL: string;
@@ -213,7 +212,6 @@ declare module '$env/dynamic/private' {
 		ProgramW6432: string;
 		PROJ_LIB: string;
 		PROMPT: string;
-		PSExecutionPolicyPreference: string;
 		PSModulePath: string;
 		PUBLIC: string;
 		SESSIONNAME: string;
