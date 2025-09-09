@@ -30,8 +30,10 @@
 <forms method="post" action="?/update">
     <button type="submit">Update Event</button>
 </forms>
-<ul>
-    {#each events as event}
-        <li>{event.title} - {event.date} - {event.time} - {event.location} - {event.category}</li>
-    {/each}
-</ul>
+<!--
+    <ul>
+        {#each events as event}
+            <li>{event.title} - {event.date} - {event.time} - {event.location} - {event.category}</li>
+        {/each}
+    </ul>
+-->

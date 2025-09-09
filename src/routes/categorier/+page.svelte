@@ -8,18 +8,18 @@
     </label>
     <label>
         Description:
-        <textarea name="description" required></textarea>
+        <input type="text" name="description" required />
     </label>
     <button type="submit">Add Category</button>
 </forms>
-<forms method="post" action="?/delete">
+<form method="post" action="?/delete">
     <button type="submit">Delete Category</button>
-</forms>
-<forms method="post" action="?/update">
+</form>
+<form method="post" action="?/update">
     <button type="submit">Update Category</button>
-</forms>
-<ul>
+</form>
+<!--<ul>
     {#each categories as category}
         <li>{category.name} - {category.description}</li>
     {/each}
-</ul>
+</ul>-->
