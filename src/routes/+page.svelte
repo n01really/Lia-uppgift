@@ -1,8 +1,3 @@
-<script lang="ts">
-
-
-</script>
-
 <h1>Welcome to Our Website!</h1>
 
 <p>Events</p>
