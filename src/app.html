@@ -1,18 +1,27 @@
+<!-- Grundläggande HTML5-dokumentdeklaration -->
 <!doctype html>
 <html lang="en">
 	<head>
+		<!-- Teckenkodning för dokumentet -->
 		<meta charset="utf-8" />
+		<!-- Favicon för sidan -->
 		<link rel="icon" href="%sveltekit.assets%/favicon.png" />
+		<!-- Gör sidan responsiv på olika enheter -->
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!-- Stöd för både mörkt och ljust tema -->
 		<meta name="color-scheme" content="dark light" />
+		<!-- SvelteKit lägger till sidans head-innehåll här -->
 		%sveltekit.head%
 
+		<!-- Länkar till delad CSS-fil för styling -->
 		<!-- duplication with svelte.dev/static/shared.css needed, else styles aren't applied during local dev -->
 		<link rel="stylesheet" href="/shared.css" />
 	</head>
 	<body>
+		<!-- Här renderas Svelte-appens innehåll -->
 		<div style="display: contents">%sveltekit.body%</div>
 
+		<!-- Script för att hantera tema (ljus/mörk) baserat på URL-parameter -->
 		<script>
 			const theme = new URL(window.location).searchParams.get('theme');
 
