@@ -38,6 +38,7 @@ declare module '$env/static/private' {
 	export const DISPLAY: string;
 	export const DriverData: string;
 	export const EDITOR: string;
+	export const EFC_9020_1592913036: string;
 	export const EXEPATH: string;
 	export const HOME: string;
 	export const HOMEDRIVE: string;
@@ -45,7 +46,7 @@ declare module '$env/static/private' {
 	export const HOSTNAME: string;
 	export const INFOPATH: string;
 	export const INIT_CWD: string;
-	export const LANG: string;
+	export const LC_CTYPE: string;
 	export const LOCALAPPDATA: string;
 	export const LOGONSERVER: string;
 	export const MANPATH: string;
@@ -80,7 +81,7 @@ declare module '$env/static/private' {
 	export const NUMBER_OF_PROCESSORS: string;
 	export const OLDPWD: string;
 	export const OneDrive: string;
-	export const OPENSSL_CONF: string;
+	export const OneDriveConsumer: string;
 	export const ORIGINAL_PATH: string;
 	export const ORIGINAL_TEMP: string;
 	export const ORIGINAL_TMP: string;
@@ -110,6 +111,8 @@ declare module '$env/static/private' {
 	export const SYSTEMROOT: string;
 	export const TEMP: string;
 	export const TERM: string;
+	export const TERM_PROGRAM: string;
+	export const TERM_PROGRAM_VERSION: string;
 	export const TMP: string;
 	export const TMPDIR: string;
 	export const USERDOMAIN: string;
@@ -117,7 +120,6 @@ declare module '$env/static/private' {
 	export const USERNAME: string;
 	export const USERPROFILE: string;
 	export const WINDIR: string;
-	export const ZES_ENABLE_SYSMAN: string;
 	export const _: string;
 }
 
@@ -160,6 +162,7 @@ declare module '$env/dynamic/private' {
 		DISPLAY: string;
 		DriverData: string;
 		EDITOR: string;
+		EFC_9020_1592913036: string;
 		EXEPATH: string;
 		HOME: string;
 		HOMEDRIVE: string;
@@ -167,7 +170,7 @@ declare module '$env/dynamic/private' {
 		HOSTNAME: string;
 		INFOPATH: string;
 		INIT_CWD: string;
-		LANG: string;
+		LC_CTYPE: string;
 		LOCALAPPDATA: string;
 		LOGONSERVER: string;
 		MANPATH: string;
@@ -202,7 +205,7 @@ declare module '$env/dynamic/private' {
 		NUMBER_OF_PROCESSORS: string;
 		OLDPWD: string;
 		OneDrive: string;
-		OPENSSL_CONF: string;
+		OneDriveConsumer: string;
 		ORIGINAL_PATH: string;
 		ORIGINAL_TEMP: string;
 		ORIGINAL_TMP: string;
@@ -232,6 +235,8 @@ declare module '$env/dynamic/private' {
 		SYSTEMROOT: string;
 		TEMP: string;
 		TERM: string;
+		TERM_PROGRAM: string;
+		TERM_PROGRAM_VERSION: string;
 		TMP: string;
 		TMPDIR: string;
 		USERDOMAIN: string;
@@ -239,7 +244,6 @@ declare module '$env/dynamic/private' {
 		USERNAME: string;
 		USERPROFILE: string;
 		WINDIR: string;
-		ZES_ENABLE_SYSMAN: string;
 		_: string;
 		[key: `PUBLIC_${string}`]: undefined;
 		[key: `${string}`]: string | undefined;

@@ -1,75 +1,137 @@
 <script>
+  import { onMount } from "svelte";
   let categories = [];
   let name = "";
   let description = "";
+  let loading = false;
+  let error = "";
 
   async function loadCategories() {
-    const res = await fetch("http://localhost:5217/categories");
-    categories = await res.json();
+    loading = true;
+    error = "";
+    try {
+      const res = await fetch("http://localhost:5217/categories");
+      if (!res.ok) throw new Error(await res.text());
+      categories = await res.json();
+    } catch (e) {
+      error = e.message;
+    } finally {
+      loading = false;
+    }
   }
 
   async function addCategory(e) {
-    e.preventDefault(); // prevent default form submission
+    e.preventDefault();
     if (!name || !description) return;
-
-    const res = await fetch("http://localhost:5217/categories", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, description })
-    });
-
-    if (!res.ok) {
-      console.error("Failed to create category:", await res.text());
-      return;
+    loading = true;
+    error = "";
+    try {
+      const res = await fetch("http://localhost:5217/categories", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, description })
+      });
+      if (!res.ok) throw new Error(await res.text());
+      name = "";
+      description = "";
+      await loadCategories();
+    } catch (e) {
+      error = e.message;
+    } finally {
+      loading = false;
     }
-
-    name = "";
-    description = "";
-    await loadCategories();
   }
 
   async function deleteCategory(id) {
-    await fetch(`http://localhost:5217/categories/${id}`, { method: "DELETE" });
-    await loadCategories();
+    loading = true;
+    error = "";
+    try {
+      const res = await fetch(`http://localhost:5217/categories/${id}`, { method: "DELETE" });
+      if (!res.ok) throw new Error(await res.text());
+      await loadCategories();
+    } catch (e) {
+      error = e.message;
+    } finally {
+      loading = false;
+    }
   }
 
-  async function updateCategory(id) {
-    const newName = prompt("New name?");
-    const newDescription = prompt("New description?");
-    if (!newName || !newDescription) return;
+  let editingId = null;
+  let editName = "";
+  let editDescription = "";
 
-    await fetch(`http://localhost:5217/categories/${id}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name: newName, description: newDescription })
-    });
-
-    await loadCategories();
+  function startEdit(cat) {
+    editingId = cat.id;
+    editName = cat.name;
+    editDescription = cat.description;
   }
 
-  loadCategories();
+  function cancelEdit() {
+    editingId = null;
+    editName = "";
+    editDescription = "";
+  }
+
+  async function saveEdit(id) {
+    if (!editName || !editDescription) return;
+    loading = true;
+    error = "";
+    try {
+      const res = await fetch(`http://localhost:5217/categories/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name: editName, description: editDescription })
+      });
+      if (!res.ok) throw new Error(await res.text());
+      editingId = null;
+      editName = "";
+      editDescription = "";
+      await loadCategories();
+    } catch (e) {
+      error = e.message;
+    } finally {
+      loading = false;
+    }
+  }
+
+  onMount(loadCategories);
 </script>
 
 <h1>Categories</h1>
 
+{#if error}
+  <p style="color: red;">{error}</p>
+{/if}
+
 <form on:submit={addCategory}>
   <label>
     Name:
-    <input type="text" bind:value={name} required />
+    <input type="text" bind:value={name} required disabled={loading} />
   </label>
   <label>
     Description:
-    <textarea bind:value={description} required></textarea>
+    <textarea bind:value={description} required disabled={loading}></textarea>
   </label>
-  <button type="submit">Add Category</button>
+  <button type="submit" disabled={loading}>Add Category</button>
 </form>
+
+{#if loading}
+  <p>Loading...</p>
+{/if}
 
 <ul>
   {#each categories as cat}
     <li>
-      {cat.name} - {cat.description}
-      <button on:click={() => deleteCategory(cat.id)}>Delete</button>
-      <button on:click={() => updateCategory(cat.id)}>Edit</button>
+      {#if editingId === cat.id}
+        <input type="text" bind:value={editName} required disabled={loading} />
+        <input type="text" bind:value={editDescription} required disabled={loading} />
+        <button on:click={() => saveEdit(cat.id)} disabled={loading}>Save</button>
+        <button on:click={cancelEdit} disabled={loading}>Cancel</button>
+      {:else}
+        {cat.name} - {cat.description}
+        <button on:click={() => deleteCategory(cat.id)} disabled={loading}>Delete</button>
+        <button on:click={() => startEdit(cat)} disabled={loading}>Edit</button>
+      {/if}
     </li>
   {/each}
 </ul>
