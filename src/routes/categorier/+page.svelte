@@ -3,6 +3,7 @@
   let name = "";
   let description = "";
 
+  
   async function loadCategories() {
     const res = await fetch("http://localhost:5217/categories");
     categories = await res.json();
