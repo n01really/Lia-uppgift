@@ -1,11 +1,17 @@
 <script>
+<<<<<<< HEAD
   import { onMount } from "svelte";
+=======
+  // Lista för att lagra kategorier
+>>>>>>> main
   let categories = [];
+  // Formulärfält för namn och beskrivning
   let name = "";
   let description = "";
   let loading = false;
   let error = "";
 
+  // Hämtar alla kategorier från API:et
   async function loadCategories() {
     loading = true;
     error = "";
@@ -20,7 +26,9 @@
     }
   }
 
+  // Lägger till en ny kategori via formuläret
   async function addCategory(e) {
+<<<<<<< HEAD
     e.preventDefault();
     if (!name || !description) return;
     loading = true;
@@ -40,8 +48,30 @@
     } finally {
       loading = false;
     }
+=======
+    e.preventDefault(); // förhindra att sidan laddas om
+    if (!name || !description) return;
+
+    const res = await fetch("http://localhost:5217/categories", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, description })
+    });
+
+    if (!res.ok) {
+      // Felhantering om API-anropet misslyckas
+      console.error("Failed to create category:", await res.text());
+      return;
+    }
+
+    // Tömmer formuläret och laddar om kategorier
+    name = "";
+    description = "";
+    await loadCategories();
+>>>>>>> main
   }
 
+  // Tar bort en kategori med angivet id
   async function deleteCategory(id) {
     loading = true;
     error = "";
@@ -56,9 +86,17 @@
     }
   }
 
+<<<<<<< HEAD
   let editingId = null;
   let editName = "";
   let editDescription = "";
+=======
+  // Uppdaterar en kategori efter prompt från användaren
+  async function updateCategory(id) {
+    const newName = prompt("New name?");
+    const newDescription = prompt("New description?");
+    if (!newName || !newDescription) return;
+>>>>>>> main
 
   function startEdit(cat) {
     editingId = cat.id;
@@ -66,6 +104,7 @@
     editDescription = cat.description;
   }
 
+<<<<<<< HEAD
   function cancelEdit() {
     editingId = null;
     editName = "";
@@ -95,14 +134,25 @@
   }
 
   onMount(loadCategories);
+=======
+  // Laddar kategorier när sidan laddas
+  loadCategories();
+>>>>>>> main
 </script>
 
+
+<!-- Rubrik för sidan -->
 <h1>Categories</h1>
 
+<<<<<<< HEAD
 {#if error}
   <p style="color: red;">{error}</p>
 {/if}
 
+=======
+
+<!-- Formulär för att lägga till en ny kategori -->
+>>>>>>> main
 <form on:submit={addCategory}>
   <label>
     Name:
@@ -115,10 +165,15 @@
   <button type="submit" disabled={loading}>Add Category</button>
 </form>
 
+<<<<<<< HEAD
 {#if loading}
   <p>Loading...</p>
 {/if}
 
+=======
+
+<!-- Lista med alla kategorier och knappar för att ta bort eller redigera -->
+>>>>>>> main
 <ul>
   {#each categories as cat}
     <li>
