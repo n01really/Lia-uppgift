@@ -43,6 +43,7 @@ declare module '$env/static/private' {
 <<<<<<< HEAD
 	export const EFC_9020_1592913036: string;
 	export const EXEPATH: string;
+<<<<<<< HEAD
 =======
 	export const EFC_17096_1592913036: string;
 	export const FPS_BROWSER_APP_PROFILE_STRING: string;
@@ -50,6 +51,10 @@ declare module '$env/static/private' {
 	export const GDAL_DATA: string;
 	export const GIT_ASKPASS: string;
 >>>>>>> main
+=======
+	export const FPS_BROWSER_APP_PROFILE_STRING: string;
+	export const FPS_BROWSER_USER_PROFILE_STRING: string;
+>>>>>>> origin/Roretesting
 	export const HOME: string;
 	export const HOMEDRIVE: string;
 	export const HOMEPATH: string;
@@ -179,6 +184,7 @@ declare module '$env/dynamic/private' {
 <<<<<<< HEAD
 		EFC_9020_1592913036: string;
 		EXEPATH: string;
+<<<<<<< HEAD
 =======
 		EFC_17096_1592913036: string;
 		FPS_BROWSER_APP_PROFILE_STRING: string;
@@ -186,6 +192,10 @@ declare module '$env/dynamic/private' {
 		GDAL_DATA: string;
 		GIT_ASKPASS: string;
 >>>>>>> main
+=======
+		FPS_BROWSER_APP_PROFILE_STRING: string;
+		FPS_BROWSER_USER_PROFILE_STRING: string;
+>>>>>>> origin/Roretesting
 		HOME: string;
 		HOMEDRIVE: string;
 		HOMEPATH: string;

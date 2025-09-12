@@ -11,7 +11,11 @@
   let loading = false;
   let error = "";
 
+<<<<<<< HEAD
   // Hämtar alla kategorier från API:et
+=======
+  
+>>>>>>> origin/Roretesting
   async function loadCategories() {
     loading = true;
     error = "";

@@ -4,26 +4,37 @@
 
   // Lista för att lagra event-objekt
   let events = [];
+  let categories = [];
+  let selectedCategoryId = null;
 
+<<<<<<< HEAD
   // Formulärfält för att skapa nytt event
+=======
+>>>>>>> origin/Roretesting
   let title = "";
   let location = "";
   let description = "";
 
+<<<<<<< HEAD
   // Lista med kategorier och valt kategori-id för dropdown
   let categories = [];
   let selectedCategoryId = null;
 
   // Hämtar alla kategorier från API:et och sätter första som vald
+=======
+>>>>>>> origin/Roretesting
   async function loadCategories() {
     const res = await fetch("http://localhost:5217/categories");
     categories = await res.json();
-    if (categories.length > 0) selectedCategoryId = categories[0].id;
+
+    if (categories.length > 0) {
+      selectedCategoryId = categories[0].id;
+      await loadEvents();
+    }
   }
 
   // Hämtar alla events för vald kategori
   async function loadEvents() {
-    if (!selectedCategoryId) return;
     const res = await fetch(`http://localhost:5217/categories/${selectedCategoryId}/events`);
     events = await res.json();
   }
@@ -32,22 +43,27 @@
   async function addEvent(e) {
     e.preventDefault();
 
-    if (!title || !location || !selectedCategoryId) return;
+    const now = new Date().toISOString();
 
+<<<<<<< HEAD
     const now = new Date().toISOString(); // nuvarande datum och tid
 
     const res = await fetch("http://localhost:5217/events", {
+=======
+    await fetch("http://localhost:5217/events", {
+>>>>>>> origin/Roretesting
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         name: title,
         date: now,
         location,
-        description: description || title,
+        description,
         categoryId: selectedCategoryId
       })
     });
 
+<<<<<<< HEAD
     if (!res.ok) {
       // Felhantering om API-anropet misslyckas
       console.error("Failed to add event:", await res.text());
@@ -55,6 +71,8 @@
     }
 
     // Tömmer formuläret och laddar om events
+=======
+>>>>>>> origin/Roretesting
     title = "";
     location = "";
     description = "";
@@ -64,20 +82,23 @@
 
   // Tar bort ett event med angivet id
   async function deleteEvent(id) {
-    await fetch(`http://localhost:5217/events/${id}`, { method: "DELETE" });
+    await fetch(`http://localhost:5217/events/${id}`, {
+      method: "DELETE"
+    });
     await loadEvents();
   }
 
   // Redigerar ett event efter prompt från användaren
   async function editEvent(ev) {
-    const newTitle = prompt("Title:", ev.eventName) || ev.eventName;
-    const newLocation = prompt("Location:", ev.location) || ev.location;
-    const newDescription = prompt("Description:", ev.description) || ev.description;
+    const newTitle = prompt("New title:", ev.eventName);
+    const newLocation = prompt("New location:", ev.location);
+    const newDescription = prompt("New description:", ev.description);
 
-    const res = await fetch(`http://localhost:5217/events/${ev.id}`, {
+    await fetch(`http://localhost:5217/events/${ev.id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
+<<<<<<< HEAD
         EventName: newTitle,
         EventDate: ev.eventDate, // behåll ursprungligt datum/tid
         Location: newLocation,
@@ -102,6 +123,19 @@
 
   // Reagerar på ändring av kategori och laddar events
   $: if (selectedCategoryId) loadEvents();
+=======
+        eventName: newTitle,
+        eventDate: ev.eventDate,
+        location: newLocation,
+        description: newDescription
+      })
+    });
+
+    await loadEvents();
+  }
+
+  onMount(loadCategories);
+>>>>>>> origin/Roretesting
 </script>
 
 
@@ -111,27 +145,15 @@
 
 <!-- Formulär för att lägga till ett nytt event -->
 <form on:submit={addEvent}>
-  <label>
-    Title:
-    <input type="text" bind:value={title} required />
-  </label>
-  <label>
-    Location:
-    <input type="text" bind:value={location} required />
-  </label>
-  <label>
-    Category:
-    <select bind:value={selectedCategoryId}>
-      {#each categories as cat}
-        <option value={cat.id}>{cat.name}</option>
-      {/each}
-    </select>
-  </label>
-  <label>
-    Description:
-    <input type="text" bind:value={description} placeholder="Optional" />
-  </label>
-  <button type="submit">Add Event</button>
+  <input placeholder="Title" bind:value={title} />
+  <input placeholder="Location" bind:value={location} />
+  <select bind:value={selectedCategoryId} on:change={loadEvents}>
+    {#each categories as cat}
+      <option value={cat.id}>{cat.name}</option>
+    {/each}
+  </select>
+  <input placeholder="Description" bind:value={description} />
+  <button>Add Event</button>
 </form>
 
 
@@ -140,9 +162,10 @@
 <ul>
   {#each events as ev}
     <li>
-      <b>{ev.eventName}</b> ({new Date(ev.eventDate).toLocaleString()}) - {ev.location} - {ev.description}
+      {ev.eventName} - {ev.location}
       <button on:click={() => editEvent(ev)}>Edit</button>
       <button on:click={() => deleteEvent(ev.id)}>Delete</button>
+      <p></p>
     </li>
   {/each}
 </ul>
