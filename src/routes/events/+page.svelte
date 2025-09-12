@@ -95,7 +95,7 @@
 <ul>
   {#each events as ev}
     <li>
-      {ev.eventName} - {ev.location}
+      {ev.eventName} - {ev.location} - {ev.eventDate} - {ev.description}
       <button on:click={() => editEvent(ev)}>Edit</button>
       <button on:click={() => deleteEvent(ev.id)}>Delete</button>
       <p></p>
